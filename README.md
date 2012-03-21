@@ -1,7 +1,7 @@
 # machina.postal
 
 ## OH MY GOSH!  WAT?
-So - machina.js is a JavaScript library for building flexible finite state machines, and postal.js is a JavaScript message bus library.  "machina.postal" is two things:
+So - [machina.js](https://github.com/ifandelse/machina.js) is a JavaScript library for building flexible finite state machines, and [postal.js](https://github.com/ifandelse/postal.js) is a JavaScript message bus library.  "machina.postal" is two things:
 
 1. A very unoriginal name.  I was going to go for something like mail.machine, but seriously, *who* wants to include `<script src="mail.machine.js"><script>` in their project?
 2. It's a BRIDGE between machina and postal.  Aw, shoot, did the unoriginal name give that away?
