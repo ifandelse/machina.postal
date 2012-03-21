@@ -1,0 +1,8 @@
+{
+    "source": "src",
+    "output": "lib/standard",
+    "lint": {},
+    "uglify": {},
+    "gzip": {},
+    "extensions": { "uglify": "min", "gzip": "gz" }
+}
