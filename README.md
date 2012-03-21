@@ -22,3 +22,63 @@ The plugin consists of an object literal with the following members:
 * `wireHandlersToBus` - set up function which handles subscribing an FSM to postal.js, using the channel name provided.
 * `wireEventsToBus` - set up function which handles subscribing to the FSM "event firehose" (the "*" event) and publishing those to postal.js.
 * `wireUp` - handler called anytime a newFsm event is raised, which in turn calls `wireHandlersToBus` and `wireEventsToBus`, passing the newly created FSM to each.
+
+## Using It
+Just including the plugin wires it into both postal.js and machina.js - just be sure to include it *after* you include the other two (if you're not going AMD).  Here's a contrived snippet of how it could work:
+
+```javascript
+// Let's set up a subscription that will write to the console
+postal.subscribe("hunger.machine.events", function(data, envelope) {
+	console.log(data.msg);
+}
+
+var myFsm = new machina.Fsm({
+	initialState: "hungry",
+
+	namespace: "hunger.machine",
+
+	states: {
+		hungry: {
+			_onEnter: function() {
+				this.fireEvent("ShoutIt", { msg: "OH MY GOSH, I'm starving" });
+			},
+
+			"go.get.food": function() {
+				this.transition("eating");
+			}
+		},
+
+		eating: {
+		    _onEnter: function() {
+                this.fireEvent("ShoutIt", { msg: "NOM NOM NOM NOM NOM!" });
+            },
+
+            "stop.eating.pig": function() {
+                this.transition("satisfied");
+            }
+		},
+
+		satisfied: {
+		    _onEnter: function() {
+                this.fireEvent("ShoutIt", { msg: "NAP TIME!" });
+            }
+		}
+	}
+});
+// when the above FSM instantiates, it will transition into "hungry", and our console subscription
+// will print out "OH MY GOSH, I'm starving!"
+
+// now that we have our FSM instance, and a subscription listening for events
+// we'll get a channel and publish to it:
+var channel = postal.channel("hunger.machine");
+channel.publish( { datums: "stuff you might want to send to the FSM handler }, { topic: "go.get.food" } );
+
+// When the "eating" state is entered, the _onEnter handler will fire and publish an event which
+// our console subscriber will catch and then print: "NOM NOM NOM NOM NOM!"
+// Then we can publish
+channel.publish( { datums: "other stuff you might want to send to the FSM }, { topic: "stop.eating.pig" } );
+
+// When the "satisfied" state is entered, the _onEnter handler will fire and publish an event which
+// our console subscriber will catch and then print: "NAP TIME!"
+
+```
