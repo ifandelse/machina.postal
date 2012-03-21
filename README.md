@@ -3,8 +3,8 @@
 ## OH MY GOSH!  WAT?
 So - machina.js is a JavaScript library for building flexible finite state machines, and postal.js is a JavaScript message bus library.  "machina.postal" is two things:
 
-1.) A very unoriginal name.  I was going to go for something like mail.machine, but seriously, *who* wants to include `<script src="mail.machine.js"><script>` in their project?
-2.) It's a BRIDGE between machina and postal.  Aw, shoot, did the unoriginal name give that away?
+1. A very unoriginal name.  I was going to go for something like mail.machine, but seriously, *who* wants to include `<script src="mail.machine.js"><script>` in their project?
+2. It's a BRIDGE between machina and postal.  Aw, shoot, did the unoriginal name give that away?
 
 ## But How?
 When you include machina.postal.js in your project, it sets the reference to machina.bus, and hooks into the "newFsm" event that gets fired anytime a new FSM is created.
