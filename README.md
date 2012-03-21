@@ -28,9 +28,13 @@ Including the plugin wires it into both postal.js and machina.js - just be sure 
 
 ```javascript
 // Let's set up a subscription that will write to the console
-postal.subscribe("hunger.machine.events", function(data, envelope) {
-	console.log(data.msg);
-}
+postal.subscribe({
+	channel: "hunger.machine.events",
+	topic: "ShoutIt",
+	callback: function(data, envelope) {
+		console.log(data.msg);
+	}
+});
 
 var myFsm = new machina.Fsm({
 	initialState: "hungry",
