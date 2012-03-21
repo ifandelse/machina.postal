@@ -24,7 +24,7 @@ The plugin consists of an object literal with the following members:
 * `wireUp` - handler called anytime a newFsm event is raised, which in turn calls `wireHandlersToBus` and `wireEventsToBus`, passing the newly created FSM to each.
 
 ## Using It
-Just including the plugin wires it into both postal.js and machina.js - just be sure to include it *after* you include the other two (if you're not going AMD).  Here's a contrived snippet of how it could work:
+Including the plugin wires it into both postal.js and machina.js - just be sure to include it *after* you include the other two (if you're not going AMD).  Here's a contrived snippet of how it could work:
 
 ```javascript
 // Let's set up a subscription that will write to the console
@@ -68,15 +68,15 @@ var myFsm = new machina.Fsm({
 // when the above FSM instantiates, it will transition into "hungry", and our console subscription
 // will print out "OH MY GOSH, I'm starving!"
 
-// now that we have our FSM instance, and a subscription listening for events
-// we'll get a channel and publish to it:
+// Now that we have our FSM instance and a subscription listening for events (above)
+// Let's get a channel and publish to it:
 var channel = postal.channel("hunger.machine");
-channel.publish( { datums: "stuff you might want to send to the FSM handler }, { topic: "go.get.food" } );
+channel.publish( { datums: "stuff you might want to send to the FSM handler" }, { topic: "go.get.food" } );
 
 // When the "eating" state is entered, the _onEnter handler will fire and publish an event which
 // our console subscriber will catch and then print: "NOM NOM NOM NOM NOM!"
 // Then we can publish
-channel.publish( { datums: "other stuff you might want to send to the FSM }, { topic: "stop.eating.pig" } );
+channel.publish( { datums: "other stuff you might want to send to the FSM" }, { topic: "stop.eating.pig" } );
 
 // When the "satisfied" state is entered, the _onEnter handler will fire and publish an event which
 // our console subscriber will catch and then print: "NAP TIME!"
