@@ -14,7 +14,7 @@ var bus = machina.bus = {
 	wireEventsToBus: function(fsm, eventChannel) {
 		var publisher = bus.channels[eventChannel].eventPublisher = function(){
 			try {
-				bus.channels[eventChannel].publish(arguments[1], { channel: eventChannel, topic: arguments[0] });
+				bus.channels[eventChannel].publish({ topic: arguments[0], data: arguments[1] || {} });
 			} catch(exception) {
 				if(console && typeof console.log !== "undefined") {
 					console.log(exception.toString());

@@ -44,9 +44,9 @@ QUnit.specify("machina.js integration with postal.js", function(){
 			testCapture[envelope.topic] = true;
 		}});
 
-		postal.publish({}, { channel: "myFsm", topic: "event21" });
-		postal.publish({}, { channel: "myFsm", topic: "event2" });
-		postal.publish({}, { channel: "myFsm", topic: "event1" });
+		postal.publish({ channel: "myFsm", topic: "event21"});
+		postal.publish({ channel: "myFsm", topic: "event2" });
+		postal.publish({ channel: "myFsm", topic: "event1" });
 		fsm.transition("NoSuchThing");
 
 		it("should fire the Transitioned event", function(){

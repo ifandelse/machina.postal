@@ -75,12 +75,12 @@ var myFsm = new machina.Fsm({
 // Now that we have our FSM instance and a subscription listening for events (above)
 // Let's get a channel and publish to it:
 var channel = postal.channel("hunger.machine");
-channel.publish( { datums: "stuff you might want to send to the FSM handler" }, { topic: "go.get.food" } );
+channel.publish( { topic: "go.get.food", data: { datums: "stuff you might want to send to the FSM handler" } } );
 
 // When the "eating" state is entered, the _onEnter handler will fire and publish an event which
 // our console subscriber will catch and then print: "NOM NOM NOM NOM NOM!"
 // Then we can publish
-channel.publish( { datums: "other stuff you might want to send to the FSM" }, { topic: "stop.eating.pig" } );
+channel.publish( { topic: "stop.eating.pig", data: { datums: "other stuff you might want to send to the FSM" } } );
 
 // When the "satisfied" state is entered, the _onEnter handler will fire and publish an event which
 // our console subscriber will catch and then print: "NAP TIME!"
