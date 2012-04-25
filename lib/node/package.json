@@ -7,6 +7,16 @@
         "type" : "git",
         "url" : "git://github.com/ifandelse/machina.postal.git"
     },
+	"keywords" : [
+		"state machine",
+	    "finite state machine",
+	    "async",
+	    "messaging",
+	    "bus",
+	    "pub/sub",
+	    "postal",
+	    "machina"
+	],
 	"author" : {
         "name" : "Jim Cowart",
         "email" : "jim@ifandelse.com",
