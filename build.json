@@ -1,8 +1,14 @@
 {
-    "source": "src",
-    "output": "lib/standard",
-    "lint": {},
-    "uglify": {},
-    "gzip": {},
-    "extensions": { "uglify": "min", "gzip": "gz" }
+	"source": "src",
+	"output": "lib",
+	"name": {
+		"machina.postal.js"     : "browser/machina.postal.js",
+		"machina.postal.min.js" : "browser/machina.postal.min.js",
+		"machina.postal.node.js" : "node/machina.postal.js"
+	},
+	"lint": {},
+	"uglify": {
+		"exclude": ["machina.postal.node.js"]
+	},
+	"extensions": { "uglify": "min" }
 }
