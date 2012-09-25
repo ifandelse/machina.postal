@@ -6,7 +6,7 @@ var bus = machina.bus = {
 	},
 	wireHandlersToBus : function ( fsm, handlerChannel ) {
 		bus.channels[handlerChannel]._subscriptions.push(
-			bus.channels[handlerChannel].subscribe( "*", function ( data, envelope ) {
+			bus.channels[handlerChannel].subscribe( "#", function ( data, envelope ) {
 				fsm.handle.call( fsm, envelope.topic, data, envelope );
 			} )
 		);

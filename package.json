@@ -1,0 +1,52 @@
+{
+    "name" : "machina.postal",
+    "description" : "A plugin for machina.js that auto-wires finite state machines into the postal.js local message bus.",
+    "version" : "0.2.0",
+    "homepage" : "https://github.com/ifandelse/machina.postal",
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/ifandelse/machina.postal.git"
+    },
+	"keywords" : [
+		"state machine",
+		"finite state machine",
+		"fsm",
+		"async",
+		"workflow",
+		"state",
+		"machina",
+		"machina-js",
+		"machina.js",
+		"machinajs"
+	],
+	"author" : "Jim Cowart (http://freshbrewedcode.com/jimcowart)",
+    "contributors": [
+        {
+            "name" : "Jim Cowart",
+            "email" : "jim@ifandelse.com",
+            "url" : "http://freshbrewedcode.com/jimcowart"
+        }
+    ],
+    "bugs" : {
+        "email" : "jim@ifandelse.com",
+        "url" : "https://github.com/ifandelse/machina.postal/issues"
+   },
+	"directories" : { "lib" : "lib/node" },
+    "main" : "lib/node/machina.postal.js",
+	"engines" : {
+		"node" : ">=0.4.0"
+	},
+	"dependencies" : {},
+	"bundleDependencies" : [],
+	"devDependencies" : {},
+    "licenses" : [
+        {
+            "type" : "MIT",
+            "url" : "http://www.opensource.org/licenses/mit-license.php"
+        },
+        {
+            "type" : "GPL",
+            "url" : "http://www.opensource.org/licenses/gpl-3.0.html"
+        }
+    ]
+}

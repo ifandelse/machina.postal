@@ -1,11 +1,7 @@
-*.suo
-*.csproj.user
-bin
-obj
-*.pdb
-_ReSharper*
-*.ReSharper.user
-*.ReSharper
+.DS_Store
 desktop.ini
 .eprj
 .idea
+.anvil
+*node_modules*
+*npm-debug*

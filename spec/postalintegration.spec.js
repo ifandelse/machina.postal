@@ -37,10 +37,10 @@ QUnit.specify( "machina.js integration with postal.js", function () {
 				}
 			}
 		} );
-		postal.subscribe( { channel : "myFsm", topic : "*", callback : function ( data, envelope ) {
+		postal.subscribe( { channel : "myFsm", topic : "#", callback : function ( data, envelope ) {
 			testCapture[envelope.topic] = true;
 		}} );
-		postal.subscribe( { channel : "myFsm.events", topic : "*", callback : function ( data, envelope ) {
+		postal.subscribe( { channel : "myFsm.events", topic : "#", callback : function ( data, envelope ) {
 			testCapture[envelope.topic] = true;
 		}} );
 

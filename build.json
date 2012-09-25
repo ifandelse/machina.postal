@@ -1,14 +1,18 @@
 {
-	"source": "src",
-	"output": "lib",
-	"name": {
-		"machina.postal.js"     : "browser/machina.postal.js",
-		"machina.postal.min.js" : "browser/machina.postal.min.js",
-		"machina.postal.node.js" : "node/machina.postal.js"
+	"anvil.uglify" : {
+		"exclude": ["./node/machina.postal.js"]
 	},
-	"lint": {},
-	"uglify": {
-		"exclude": ["machina.postal.node.js"]
+	"anvil.http": {
+		"paths" : {
+			"/lib"          : "./lib",
+			"/ext"          : "./ext",
+			"/load"         : "./example/load",
+			"/spec"         : "./spec"
+		},
+		"port" : 8001
 	},
-	"extensions": { "uglify": "min" }
+	"anvil.jshint" : {
+		"all": true
+	},
+	"dependencies": [ "anvil.http", "anvil.uglify" ]
 }
