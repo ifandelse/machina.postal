@@ -1,7 +1,7 @@
 {
     "name" : "machina.postal",
     "description" : "A plugin for machina.js that auto-wires finite state machines into the postal.js local message bus.",
-    "version" : "0.2.0",
+    "version" : "0.2.1",
     "homepage" : "https://github.com/ifandelse/machina.postal",
     "repository" : {
         "type" : "git",
