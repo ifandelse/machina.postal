@@ -1,3 +1,12 @@
+var dataParser = {
+	transitioned: function(data) {
+		return { fromState: data[0], toState: data[1] };
+	},
+	transitioning: function(data) {
+		return { fromState: data[0], toState: data[1] };
+	}
+};
+
 var bus = machina.bus = {
 	channels : {},
 	config : {
@@ -14,8 +23,9 @@ var bus = machina.bus = {
 	wireEventsToBus : function ( fsm, eventChannel ) {
 		var publisher = bus.channels[eventChannel].eventPublisher = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
+			var handler = args[0].toLowerCase();
 			try {
-				var data = args[0] === "Transitioned" ? { fromState: args[1], toState: args[2] } : args[1];
+				var data = dataParser.hasOwnProperty(handler) ? dataParser[handler](args.slice(1)) : args[1];
 				bus.channels[eventChannel].publish( { topic : args[0], data : data || {} } );
 			} catch ( exception ) {
 				if ( console && typeof console.log !== "undefined" ) {
