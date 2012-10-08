@@ -1,11 +1,11 @@
 var testCapture = {
-	"fsm.events.NoHandler" : false,
-	"fsm.events.Transitioned" : false,
-	"fsm.events.Handling" : false,
-	"fsm.events.Handled" : false,
-	"fsm.events.InvalidState" : false,
+	"fsm.events.nohandler" : false,
+	"fsm.events.transitioned" : false,
+	"fsm.events.handling" : false,
+	"fsm.events.handled" : false,
+	"fsm.events.invalidstate" : false,
 	"fsm.events.CustomEvent" : false,
-	"fsm.events.Deferred" : false,
+	"fsm.events.deferred" : false,
 	"fsm.events.OnEnter" : false
 };
 
@@ -49,17 +49,17 @@ QUnit.specify( "machina.js integration with postal.js", function () {
 		postal.publish( { channel : "myFsm", topic : "event1" } );
 		fsm.transition( "NoSuchThing" );
 
-		it( "should fire the Transitioned event", function () {
-			assert( testCapture["Transitioned"] ).equals( true );
+		it( "should fire the transition event", function () {
+			assert( testCapture["transition"] ).equals( true );
 		} );
-		it( "should fire the NoHandler event", function () {
-			assert( testCapture["NoHandler"] ).equals( true );
+		it( "should fire the nohandler event", function () {
+			assert( testCapture["nohandler"] ).equals( true );
 		} );
-		it( "should fire the Handling event", function () {
-			assert( testCapture["Handling"] ).equals( true );
+		it( "should fire the handling event", function () {
+			assert( testCapture["handling"] ).equals( true );
 		} );
-		it( "should fire the Handled event", function () {
-			assert( testCapture["Handled"] ).equals( true );
+		it( "should fire the handled event", function () {
+			assert( testCapture["handled"] ).equals( true );
 		} );
 		it( "should fire the CustomEvent event", function () {
 			assert( testCapture["CustomEvent"] ).equals( true );
@@ -67,11 +67,11 @@ QUnit.specify( "machina.js integration with postal.js", function () {
 		it( "should fire the OnEnter handler", function () {
 			assert( testCapture["OnEnter"] ).equals( true );
 		} );
-		it( "should fire the InvalidState handler", function () {
-			assert( testCapture["InvalidState"] ).equals( true );
+		it( "should fire the invalidstate handler", function () {
+			assert( testCapture["invalidstate"] ).equals( true );
 		} );
-		it( "should fire the Deferred handler", function () {
-			assert( testCapture["Deferred"] ).equals( true );
+		it( "should fire the deferred handler", function () {
+			assert( testCapture["deferred"] ).equals( true );
 		} );
 	} );
 } );

@@ -45,4 +45,4 @@ var bus = machina.bus = {
 		bus.wireEventsToBus( fsm, eventChannel );
 	}
 };
-machina.on( "newFsm", bus.wireUp );
+machina.on( "newfsm", bus.wireUp );

@@ -86,3 +86,6 @@ channel.publish( { topic: "stop.eating.pig", data: { datums: "other stuff you mi
 // our console subscriber will catch and then print: "NAP TIME!"
 
 ```
+
+## Compatibility Notes
+machina.postal v0.2.3 is compatible with machina v0.2.2 and forward.  If you need to use this project with an earlier version of machina.js, then download a version tagged v0.2.2 or earlier.
