@@ -1,6 +1,6 @@
 var testCapture = {
 	"fsm.events.nohandler" : false,
-	"fsm.events.transitioned" : false,
+	"fsm.events.transition" : false,
 	"fsm.events.handling" : false,
 	"fsm.events.handled" : false,
 	"fsm.events.invalidstate" : false,
