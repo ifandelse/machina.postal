@@ -9,11 +9,11 @@ var resourceGetter = {
 				url : "http://api.ihackernews.com/page?format=jsonp",
 				dataType : "jsonp",
 				success : function ( data ) {
-					postal.publish( "application", "itemData.retrieved", data );
+					postal.publish({ channel: "application", topic: "itemData.retrieved", data: data });
 				}
 			} );
 			return setTimeout( function () {
-				postal.publish( "application", "itemData.getFailed", {} );
+				postal.publish({ channel: "application", topic: "itemData.getFailed", data: {} });
 			}, 4000 );
 		}
 	},
@@ -83,13 +83,13 @@ var resourceGetter = {
 					this.checkIfReady();
 				},
 				"itemData.getFailed" : function () {
-					this.fireEvent( "dataGetFail", { attempts : ++this.constraints.waitingOnData.attempts } );
+					this.emit( "dataGetFail", { attempts : ++this.constraints.waitingOnData.attempts } );
 					resourceGetter.getNews();
 				}
 			},
 			"ready" : {
 				_onEnter : function () {
-					this.fireEvent( "appReady" );
+					this.emit( "appReady" );
 				},
 				refresh : function () {
 					this.transition( "waitingOnData" );

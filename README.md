@@ -44,7 +44,7 @@ var myFsm = new machina.Fsm({
 	states: {
 		hungry: {
 			_onEnter: function() {
-				this.fireEvent("ShoutIt", { msg: "OH MY GOSH, I'm starving" });
+				this.emit("ShoutIt", { msg: "OH MY GOSH, I'm starving" });
 			},
 
 			"go.get.food": function() {
@@ -54,7 +54,7 @@ var myFsm = new machina.Fsm({
 
 		eating: {
 		    _onEnter: function() {
-                this.fireEvent("ShoutIt", { msg: "NOM NOM NOM NOM NOM!" });
+                this.emit("ShoutIt", { msg: "NOM NOM NOM NOM NOM!" });
             },
 
             "stop.eating.pig": function() {
@@ -64,7 +64,7 @@ var myFsm = new machina.Fsm({
 
 		satisfied: {
 		    _onEnter: function() {
-                this.fireEvent("ShoutIt", { msg: "NAP TIME!" });
+                this.emit("ShoutIt", { msg: "NAP TIME!" });
             }
 		}
 	}
@@ -88,4 +88,6 @@ channel.publish( { topic: "stop.eating.pig", data: { datums: "other stuff you mi
 ```
 
 ## Compatibility Notes
-machina.postal v0.2.3 is compatible with machina v0.2.2 and forward.  If you need to use this project with an earlier version of machina.js, then download a version tagged v0.2.2 or earlier.
+machina.postal v0.3.0 is compatibale with machina v0.3.x and postal v0.8.x.  You want to use these versions, trust me.
+
+If you must, here's the older info: machina.postal v0.2.3 is compatible with machina v0.2.x.  If you need to use this project with an earlier version of machina.js, then download a version tagged v0.2.2 or earlier.

@@ -25,10 +25,10 @@ describe( "With custom FSM", function () {
 			},
 			"initialized" : {
 				_onEnter : function () {
-					this.fireEvent( "OnEnter" );
+					this.emit( "OnEnter" );
 				},
 				"event2" : function () {
-					this.fireEvent( "CustomEvent" );
+					this.emit( "CustomEvent" );
 				},
 				"event3" : function () {
 
@@ -89,10 +89,10 @@ describe( "With Multiple FSMs", function () {
 			},
 			"initialized" : {
 				_onEnter : function () {
-					this.fireEvent( "OnEnter" );
+					this.emit( "OnEnter" );
 				},
 				"event2" : function () {
-					this.fireEvent( "CustomEvent" );
+					this.emit( "CustomEvent" );
 				},
 				"event3" : function () {
 
@@ -118,11 +118,11 @@ describe( "With Multiple FSMs", function () {
 			},
 			"initialized" : {
 				_onEnter : function () {
-					this.fireEvent( "OnEnter" );
+					this.emit( "OnEnter" );
 				},
 				"event2" : function () {
 					fsm2Events.event2 = true;
-					this.fireEvent( "CustomEvent" );
+					this.emit( "CustomEvent" );
 				},
 				"event3" : function () {
 					fsm2Events.event3 = true;

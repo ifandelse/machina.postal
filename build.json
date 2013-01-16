@@ -8,8 +8,7 @@
 			"/ext"          : "./ext",
 			"/load"         : "./example/load",
 			"/spec"         : "./spec"
-		},
-		"port" : 8001
+		}
 	},
 	"anvil.jshint" : {
 		"all": true
