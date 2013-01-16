@@ -31,12 +31,15 @@
         "email" : "jim@ifandelse.com",
         "url" : "https://github.com/ifandelse/machina.postal/issues"
    },
-	"directories" : { "lib" : "lib/node" },
-    "main" : "lib/node/machina.postal.js",
+	"directories" : { "lib" : "lib" },
+    "main" : "lib/machina.postal.js",
 	"engines" : {
 		"node" : ">=0.4.0"
 	},
-	"dependencies" : {},
+	"dependencies" : {
+		"postal"     : ">=0.8.0",
+		"machina"    : ">=0.3.0"
+	},
 	"bundleDependencies" : [],
 	"devDependencies" : {},
     "licenses" : [
