@@ -16,8 +16,6 @@
 
     var bus = machina.bus = {
 
-        channels: {},
-
         config: {
             handlerChannelSuffix: "",
             eventChannelSuffix: ".events"

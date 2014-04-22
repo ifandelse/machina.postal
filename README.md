@@ -3,14 +3,14 @@
 ##v0.4.0
 
 ## What *is* this thing?!
-So - [machina.js](https://github.com/ifandelse/machina.js) is a JavaScript library for building flexible finite state machines, and [postal.js](https://github.com/ifandelse/postal.js) is a JavaScript message bus library.  "machina.postal" is two things:
+So - [machina.js](https://github.com/ifandelse/machina.js) is a JavaScript library for building flexible finite state machines, and [postal.js](https://github.com/postaljs/postal.js) is a JavaScript message bus library.  "machina.postal" is two things:
 
 1. A very unoriginal name.  I was going to go for something like mail.machine, but seriously, *who* wants to include `<script src="mail.machine.js"><script>` in their project?
 2. It's a BRIDGE between machina and postal.  Aw, shoot, did the unoriginal name give that away?
 
 ## But How?
 When you include machina.postal.js in your project, it hooks into the "newFsm" event that gets fired anytime a new FSM is created.
-In the handler for the "newFsm" event, the machina.postal plugin subscribes to postal, using the FSM's namespace as a channel name, and a wildcard "*" as the topic (will match ANY topic on that channel).  From that point on, if anyone publishes a message on the FSM's channel, with a topic that matches the name of a handler, the FSM will call `handle`, routing the message payload to the handler name (assuming one exists under the current state) which matches the message topic.  Voila!  Your application components can now interact with the FSM over the message bus, and not require a direct reference to it.
+In the handler for the "newFsm" event, the machina.postal plugin subscribes to postal, using the FSM's namespace as a channel name, and a wildcard "\#" as the topic (will match ANY topic on that channel).  From that point on, if anyone publishes a message on the FSM's channel, with a topic that matches the name of a handler, the FSM will call `handle`, routing the message payload to the handler name (assuming one exists under the current state) which matches the message topic.  Voila!  Your application components can now interact with the FSM over the message bus, and not require a direct reference to it.
 
 But wait, there's more.
 
@@ -21,7 +21,6 @@ FSMs that are wired up this way will have a `_bus` property added which contains
 ## Really, there's not much....let's have a looksee:
 The plugin consists of an object literal with the following members:
 
-* `channels` - this is a channel cache for postal (so that new ChannelDefinitions aren't getting created/destroyed all the time).  If you create an FSM named "myFsm" and you don't change the `config` options (below), you will see two channels appear in this cache: "myFsm" and "myFsm.events".  The "myFsm" channel is for handlers, and it will have a member which is an array of postal subscription definitions.  The "myFsm.events" channel is for publishing events, and it will have a member named "eventPublisher" which is the callback subscribed to the "*" event on the FSM, relaying the events to postal.js.
 * `config` - object literal containing default "suffixes" for the handler and event channels.  The handlerChannelSuffix defaults to an empty string, while the eventChannelSuffix defaults to ".events".  While it's certainly possible to let the FSM publish event messages and listen for handler messages on the same channel, it's recommended to separate them, in case you happen to name an event identical to a handler name (and thus get double triggering, or, God forbid, a message loop).
 * `wireHandlersToBus` - set up function which handles subscribing an FSM to postal.js, using the channel name provided.
 * `wireEventsToBus` - set up function which handles subscribing to the FSM "event firehose" (the "*" event) and publishing those to postal.js.
