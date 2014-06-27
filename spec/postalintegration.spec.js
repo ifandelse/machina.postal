@@ -300,3 +300,83 @@ describe( "When Opting Out of Bus Integration", function() {
 		expect( testCapture["deferred"] ).to.be( false );
 	} );
 });
+
+describe( "When specifying custom channels as a string", function() {
+    before(function() {
+        testCapture = {
+            "nohandler"    : false,
+            "transition"   : false,
+            "handling"     : false,
+            "handled"      : false,
+            "invalidstate" : false,
+            "CustomEvent"  : false,
+            "deferred"     : false,
+            "OnEnter"      : false
+        };
+        fsm = new machina.Fsm( {
+            handlerChannel: 'myHandlerChannel',
+            eventChannel: 'myEventChannel',
+            initialState : "uninitialized",
+            namespace : "myFsmC",
+            states : {
+                "uninitialized" : {
+                    "event1" : function () {
+                        this.transition( "initialized" );
+                    },
+                    "event2" : function () {
+                        this.deferUntilTransition();
+                    }
+                },
+                "initialized" : {
+                    _onEnter : function () {
+                        this.removeAllBusIntegration();
+                        this.emit( "OnEnter" );
+                    },
+                    "event2" : function () {
+                        this.emit( "CustomEvent" );
+                    },
+                    "event3" : function () {
+
+                    }
+                }
+            }
+        } );
+        postal.subscribe( { channel : "myHandlerChannel", topic : "#", callback : function ( data, envelope ) {
+            testCapture[envelope.topic] = true;
+        }} );
+        postal.subscribe( { channel : "myEventChannel", topic : "#", callback : function ( data, envelope ) {
+            testCapture[envelope.topic] = true;
+        }} );
+
+        postal.publish( { channel : "myHandlerChannel", topic : "event21"} );
+        postal.publish( { channel : "myHandlerChannel", topic : "event2" } );
+        postal.publish( { channel : "myHandlerChannel", topic : "event1" } );
+        fsm.transition( "NoSuchThing" );
+    });
+
+    it( "should fire the transition event", function () {
+        expect( testCapture["transition"] ).to.be( true );
+    } );
+    it( "should fire the nohandler event", function () {
+        expect( testCapture["nohandler"] ).to.be( true );
+    } );
+    it( "should fire the handling event", function () {
+        expect( testCapture["handling"] ).to.be( true );
+    } );
+    it( "should fire the handled event", function () {
+        expect( testCapture["handled"] ).to.be( true );
+    } );
+    it( "should NOT fire the CustomEvent event", function () {
+        expect( testCapture["CustomEvent"] ).to.be( true );
+    } );
+    it( "should NOT fire the OnEnter handler", function () {
+        expect( testCapture["OnEnter"] ).to.be( true );
+    } );
+    it( "should fire the invalidstate handler", function () {
+        expect( testCapture["invalidstate"] ).to.be( true );
+    } );
+    it( "should fire the deferred handler", function () {
+        expect( testCapture["deferred"] ).to.be( true );
+    } );
+});
+
