@@ -46,15 +46,13 @@
 
         wireUp: function (fsm) {
             function getChannel(channelOption, channelTypeSuffix) {
-                if (channelOption) {
-                    if (typeof channelOption === 'ChannelDefinition') {
-                        return { name: channelOption.channel, channel: fsm.handlerChannel}
-                    }
-                    else if(typeof channelOption !== 'String') {
-                        channelOption = fsm.namespace + channelTypeSuffix;
-                    }
-                    return { name: channelOption, channel: postal.channel(channelOption) };
+                if (channelOption && _.isFunction(channelOption.publish) && _.isFunction(channelOption.subscribe)) {
+                    return { name: channelOption.channel, channel: channelOption}
                 }
+                else if(!_.isString(channelOption)) {
+                    channelOption = fsm.namespace + channelTypeSuffix;
+                }
+                return { name: channelOption, channel: postal.channel(channelOption) };
             }
             if (fsm._noBus) {
                 return;
@@ -66,11 +64,11 @@
                 eventChannel: eventChannel.name,
                 channels: {}
             };
-            fsm._bus.channels[handlerChannel] = handlerChannel.channel;
-            fsm._bus.channels[eventChannel] = handlerChannel.channel;
-            fsm._bus.channels[handlerChannel]._subscriptions = [];
-            this.wireHandlersToBus(fsm, handlerChannel);
-            this.wireEventsToBus(fsm, eventChannel);
+            fsm._bus.channels[handlerChannel.name] = handlerChannel.channel;
+            fsm._bus.channels[eventChannel.name] = eventChannel.channel;
+            fsm._bus.channels[handlerChannel.name]._subscriptions = [];
+            this.wireHandlersToBus(fsm, handlerChannel.name);
+            this.wireEventsToBus(fsm, eventChannel.name);
         }
     };
 

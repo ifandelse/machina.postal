@@ -1,50 +1,50 @@
 {
-    "name" : "machina.postal",
-    "description" : "A plugin for machina.js that auto-wires finite state machines into the postal.js local message bus.",
-    "version" : "0.4.0",
-    "homepage" : "https://github.com/ifandelse/machina.postal",
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/ifandelse/machina.postal.git"
+    "name": "machina.postal",
+    "description": "A plugin for machina.js that auto-wires finite state machines into the postal.js local message bus.",
+    "version": "0.4.0",
+    "homepage": "https://github.com/ifandelse/machina.postal",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/ifandelse/machina.postal.git"
     },
-	"keywords" : [
-		"state machine",
-		"finite state machine",
-		"fsm",
-		"async",
-		"workflow",
-		"state",
-		"machina",
-		"machina-js",
-		"machina.js",
-		"machinajs"
-	],
-	"author" : "Jim Cowart (http://freshbrewedcode.com/jimcowart)",
+    "keywords": [
+        "state machine",
+        "finite state machine",
+        "fsm",
+        "async",
+        "workflow",
+        "state",
+        "machina",
+        "machina-js",
+        "machina.js",
+        "machinajs"
+    ],
+    "author": "Jim Cowart (http://freshbrewedcode.com/jimcowart)",
     "contributors": [
         {
-            "name" : "Jim Cowart",
-            "email" : "jim@ifandelse.com",
-            "url" : "http://freshbrewedcode.com/jimcowart"
+            "name": "Jim Cowart",
+            "email": "jim@ifandelse.com",
+            "url": "http://freshbrewedcode.com/jimcowart"
         }
     ],
-    "bugs" : {
-        "email" : "jim@ifandelse.com",
-        "url" : "https://github.com/ifandelse/machina.postal/issues"
-   },
-    "main" : "lib/machina.postal.js",
-	"dependencies" : {
-		"postal.js"  : "~0.8.0",
-		"machina"    : "~0.3.0"
-	},
-	"devDependencies": {
-        "jquery"             : "~1.10.2",
-        "bootstrap"          : "~3.0.3",
-        "expect"             : "0.1.2",
-        "mocha"              : "~1.17.0",
-        "requirejs"          : "~2.1.10",
-        "postal.diagnostics" : "~0.7.0",
-        "postal.js"          : "~0.8.0",
-        "machina"            : "~0.3.0"
+    "bugs": {
+        "email": "jim@ifandelse.com",
+        "url": "https://github.com/ifandelse/machina.postal/issues"
+    },
+    "main": "lib/machina.postal.js",
+    "dependencies": {
+        "postal.js": "~0.8.0 || ~0.10",
+        "machina": "~0.3.0"
+    },
+    "devDependencies": {
+        "jquery": "~1.10.2",
+        "bootstrap": "~3.0.3",
+        "expect": "0.1.2",
+        "mocha": "~1.17.0",
+        "requirejs": "~2.1.10",
+        "postal.diagnostics": "~0.7.0",
+        "postal.js": "~0.8.0 || ~0.10",
+        "machina": "~0.3.0"
     },
     "licenses": [
         {
@@ -56,8 +56,5 @@
         "test": "mocha ./spec/*.js",
         "build": "gulp",
         "start": "gulp server"
-    },
-    "resolutions": {
-        "underscore": "~1.5.2"
     }
 }
