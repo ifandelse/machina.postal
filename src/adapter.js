@@ -45,21 +45,30 @@
         },
 
         wireUp: function (fsm) {
-            if(fsm._noBus) {
+            function getChannel(channelOption, channelTypeSuffix) {
+                if (channelOption && _.isFunction(channelOption.publish) && _.isFunction(channelOption.subscribe)) {
+                    return { name: channelOption.channel, channel: channelOption}
+                }
+                else if(!_.isString(channelOption)) {
+                    channelOption = fsm.namespace + channelTypeSuffix;
+                }
+                return { name: channelOption, channel: postal.channel(channelOption) };
+            }
+            if (fsm._noBus) {
                 return;
             }
-            var handlerChannel = fsm.namespace + this.config.handlerChannelSuffix,
-                eventChannel = fsm.namespace + this.config.eventChannelSuffix;
+            var handlerChannel = getChannel(fsm.handlerChannel, this.config.handlerChannelSuffix),
+                eventChannel = getChannel(fsm.eventChannel, this.config.eventChannelSuffix);
             fsm._bus = {
-                handlerChannel: handlerChannel,
-                eventChannel: eventChannel,
+                handlerChannel: handlerChannel.name,
+                eventChannel: eventChannel.name,
                 channels: {}
             };
-            fsm._bus.channels[handlerChannel] = postal.channel(handlerChannel);
-            fsm._bus.channels[eventChannel] = postal.channel(eventChannel);
-            fsm._bus.channels[handlerChannel]._subscriptions = [];
-            this.wireHandlersToBus(fsm, handlerChannel);
-            this.wireEventsToBus(fsm, eventChannel);
+            fsm._bus.channels[handlerChannel.name] = handlerChannel.channel;
+            fsm._bus.channels[eventChannel.name] = eventChannel.channel;
+            fsm._bus.channels[handlerChannel.name]._subscriptions = [];
+            this.wireHandlersToBus(fsm, handlerChannel.name);
+            this.wireEventsToBus(fsm, eventChannel.name);
         }
     };
 
